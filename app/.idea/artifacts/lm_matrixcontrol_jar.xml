@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="lm-matrixcontrol:jar">
+    <output-path>$PROJECT_DIR$/out</output-path>
+    <root id="archive" name="lm-matrixcontrol.jar">
+      <element id="module-output" name="lm-matrixcontrol" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-core-2.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jSerialComm-1.3.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-api-2.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/AppleJavaExtensions.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,4 @@
+.DS_Store
+app/out/*
+app/.idea/workspace.xml
+app/.idea/tasks.xml
