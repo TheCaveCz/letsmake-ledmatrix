@@ -104,7 +104,7 @@ void commExec() {
   } else if (commBufPos >= 3 && firstChar == 'T') {
     int textSpeed = commParseHex(1);
     if (textSpeed == -1) return;
-    textShow(&commBuffer[3], textSpeed, false);
+    textShow((char*)&commBuffer[3], textSpeed, false);
     if (modeCurrent == MODE_TEXT) textEnter();
     commSendText();
 
