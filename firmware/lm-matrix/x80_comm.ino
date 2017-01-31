@@ -68,6 +68,7 @@ uint8_t commParseHexDigit(const uint8_t addr, const uint8_t maxVal) {
     Serial.println(F("-invalid number"));
   }
   if (r > maxVal) {
+    r = 255;
     Serial.println(F("-number too high"));
   }
   return r;
