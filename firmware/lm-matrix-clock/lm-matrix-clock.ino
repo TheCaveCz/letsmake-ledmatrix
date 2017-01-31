@@ -18,4 +18,3 @@
 #define PIN_LOAD A1
 #define PIN_BUTTON 2
 
-uint32_t currentTime = 0;

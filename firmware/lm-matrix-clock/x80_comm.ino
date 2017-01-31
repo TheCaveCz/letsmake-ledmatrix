@@ -121,7 +121,7 @@ void commExec() {
       return;
     }
 
-    updateTime(3600l * a + 60l * c + e);
+    timeSet(3600l * a + 60l * c + e);
 
     commPrintTime();
   } else if (commBufPos == 1 && firstChar == 'W') {
@@ -135,7 +135,7 @@ void commExec() {
 
 void commPrintTime() {
   Serial.write('+');
-  uint32_t t = currentTime;
+  uint32_t t = timeCurrent;
   commPrintDec(t / 3600);
   t %= 3600;
   commPrintDec(t / 60);

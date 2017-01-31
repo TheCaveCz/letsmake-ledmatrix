@@ -1,6 +1,6 @@
 #define EEPROM_ADDR_START 0
 #define EEPROM_ADDR_TIME 1
-#define EEPROM_DATA_LEN (EEPROM_ADDR_TIME+sizeof(currentTime))
+#define EEPROM_DATA_LEN (EEPROM_ADDR_TIME+sizeof(timeCurrent))
 
 // magic byte - by reading this we know that eeprom was really written by this sketch
 #define EEPROM_MAGIC 112
@@ -23,11 +23,13 @@ void eepromSetup() {
 }
 
 void eepromLoad() {
-  EEPROM.get(EEPROM_ADDR_TIME, currentTime);
+  uint32_t t;
+  EEPROM.get(EEPROM_ADDR_TIME, t);
+  timeSet(t);
 }
 
 void eepromSave() {
-  EEPROM.put(EEPROM_ADDR_TIME, currentTime);
+  EEPROM.put(EEPROM_ADDR_TIME, timeCurrent);
   EEPROM.write(EEPROM_ADDR_START, EEPROM_MAGIC); // write magic byte last -> protection against reset while writing
 }
 
