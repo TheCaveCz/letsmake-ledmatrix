@@ -1,4 +1,4 @@
-#define MAX_TEXT_LEN 10
+#define MAX_TEXT_LEN 9
 #define ANIMATION_FRAME_TIME 10
 
 typedef struct {
@@ -13,14 +13,20 @@ uint8_t textDisplayBufferPos;
 uint32_t textLastFrameTime;
 
 
+
 void textSetup() {
   memset(textInfo.buffer, 0, sizeof(textInfo.buffer));
-  strcpy(textInfo.buffer, "00:00:00 ");
-  textInfo.len = strlen(textInfo.buffer);
-  textInfo.delayFrames = 10;
+  textInfo.buffer[2] = 10;
+  textInfo.buffer[5] = 10;
+  textInfo.buffer[8] = 11;
+  textInfo.len = MAX_TEXT_LEN;
+  textInfo.delayFrames = 8;
+}
 
+void textEnter() {
   textDisplayBufferPos = displayStart = 0;
   textPos = 0;
+  textRefresh();
   textShowNext();
   textShowNext();
   displayRefresh();
@@ -39,11 +45,21 @@ void textLoop() {
   displayRefresh();
 }
 
-uint8_t textDrawChar(char code, uint8_t pos) {
-  if (code < 32 || code > 126) code = '?';
+void textRefresh() {
+  uint8_t a[6];
+  timeToArray(timeCurrent, a);
 
+  textInfo.buffer[0] = a[0];
+  textInfo.buffer[1] = a[1];
+  textInfo.buffer[3] = a[2];
+  textInfo.buffer[4] = a[3];
+  textInfo.buffer[6] = a[4];
+  textInfo.buffer[7] = a[5];
+}
+
+uint8_t textDrawChar(char code, uint8_t pos) {
   Character ch;
-  memcpy_P(&ch, &textChars[code - 32], sizeof(Character));
+  memcpy_P(&ch, &textChars[code - 0], sizeof(Character));
   for (uint8_t i = 0; i < ch.cols; i++) {
     displayBuffer[pos] = ch.data[i];
     pos = (pos + 1) % 16;
@@ -55,6 +71,9 @@ uint8_t textDrawChar(char code, uint8_t pos) {
 
 void textShowNext() {
   textDisplayBufferPos = textDrawChar(textInfo.buffer[textPos++], textDisplayBufferPos);
-  if (textPos >= textInfo.len) textPos = 0;
+  if (textPos >= textInfo.len) {
+    textPos = 0;
+    textRefresh();
+  }
 }
 
