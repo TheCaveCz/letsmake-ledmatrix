@@ -49,11 +49,6 @@ uint8_t commParseHexDigit(const uint8_t addr, const uint8_t maxVal) {
   return r;
 }
 
-void commPrintHex(const uint8_t b) {
-  if (b < 16) Serial.write('0');
-  Serial.print(b, HEX);
-}
-
 void commExec() {
   char firstChar = commBuffer[0];
   if (commBufPos == 1 && firstChar == '?') {
@@ -67,6 +62,30 @@ void commExec() {
     if (b == 255) return;
     displaySetBrightness(b);
     commSendBrightness();
+
+  } else if (commBufPos == 1 && firstChar == 'C') {
+    commSendClockMode();
+
+  } else if (commBufPos == 2 && firstChar == 'C') {
+    uint8_t newMode = commParseHexDigit(1, CLOCK_MODE_COUNT - 1);
+    if (newMode == 255) return;
+    clockMode = newMode;
+    clockEnter();
+    commSendClockMode();
+
+  } else if (commBufPos == 1 && firstChar == 'D') {
+    commSendTreshold();
+
+  } else if (commBufPos == 4 && firstChar == 'D') {
+    uint16_t a = commParseHexDigit(1, 15);
+    if (a == 255) return;
+    uint8_t b = commParseHexDigit(2, 15);
+    if (b == 255) return;
+    uint8_t c = commParseHexDigit(3, 15);
+    if (c == 255) return;
+
+    timeTreshold = a << 8 | b << 4 | c;
+    commSendTreshold();
 
   } else if (commBufPos == 1 && firstChar == 'M') {
     commSendMode();
@@ -120,5 +139,17 @@ void commSendBrightness() {
 void commSendMode() {
   Serial.write('+');
   Serial.println(modeCurrent, HEX);
+}
+
+void commSendClockMode() {
+  Serial.write('+');
+  Serial.println(clockMode, HEX);
+}
+
+void commSendTreshold() {
+  Serial.write('+');
+  if (timeTreshold < 256) Serial.write('0');
+  if (timeTreshold < 16) Serial.write('0');
+  Serial.println(timeTreshold, HEX);
 }
 

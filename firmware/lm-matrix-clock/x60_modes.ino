@@ -1,28 +1,37 @@
-#define MODE_TEXT 0
-#define MODE_MATRIX 1
-#define MODE_MATRIX_HARD 2
-#define MODE_COUNT 3
+#define MODE_CLOCK 0
+#define MODE_SETTING_1 1
+#define MODE_SETTING_2 2
+#define MODE_SETTING_3 3
+#define MODE_SETTING_4 4
+#define MODE_COUNT 5
 
 typedef struct {
   void (*loopCallback)();
   void (*buttonCallback)();
   void (*enterCallback)();
+  void (*exitCallback)();
 } Mode;
 
 Mode modes[MODE_COUNT] = {
-  {&textLoop, &textEnter, &textEnter},
-  {&matrixLoop, NULL, &matrixEnterEasy},
-  {&matrixLoop, NULL, &matrixEnterHard},
+  {&clockLoop, &clockButton, &clockEnter, NULL},
+  {&settingLoop, &settingButton, &settingEnter1, NULL},
+  {&settingLoop, &settingButton, &settingEnter2, NULL},
+  {&settingLoop, &settingButton, &settingEnter3, NULL},
+  {&settingLoop, &settingButton, &settingEnter4, &settingExit}
 };
 
 uint8_t modeCurrent;
 
 
 void modeSetup() {
+  modeCurrent = 0;
   modeSet(0);
 }
 
 void modeSet(uint8_t mode) {
+  if (modes[modeCurrent].exitCallback != NULL) {
+    modes[modeCurrent].exitCallback();
+  }
   modeCurrent = mode >= MODE_COUNT ? 0 : mode;
   if (modes[modeCurrent].enterCallback != NULL) {
     modes[modeCurrent].enterCallback();
@@ -42,6 +51,9 @@ void buttonShortPress() {
 }
 
 void buttonLongPress() {
+  if (modes[modeCurrent].exitCallback != NULL) {
+    modes[modeCurrent].exitCallback();
+  }
   modeCurrent++;
   if (modeCurrent >= MODE_COUNT) {
     modeCurrent = 0;

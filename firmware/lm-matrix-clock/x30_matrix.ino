@@ -1,14 +1,6 @@
-
 uint32_t matrixLastTime;
 uint8_t matrixHard;
 
-void matrixEnterHard() {
-  matrixEnter(true);
-}
-
-void matrixEnterEasy() {
-  matrixEnter(false);
-}
 
 void matrixEnter(bool hard) {
   matrixHard = hard;

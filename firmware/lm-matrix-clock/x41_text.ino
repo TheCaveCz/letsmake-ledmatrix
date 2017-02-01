@@ -1,4 +1,4 @@
-#define MAX_TEXT_LEN 9
+#define MAX_TEXT_LEN 6
 #define ANIMATION_FRAME_TIME 10
 
 typedef struct {
@@ -17,10 +17,9 @@ uint32_t textLastFrameTime;
 void textSetup() {
   memset(textInfo.buffer, 0, sizeof(textInfo.buffer));
   textInfo.buffer[2] = 10;
-  textInfo.buffer[5] = 10;
-  textInfo.buffer[8] = 11;
+  textInfo.buffer[5] = 11;
   textInfo.len = MAX_TEXT_LEN;
-  textInfo.delayFrames = 8;
+  textInfo.delayFrames = 10;
 }
 
 void textEnter() {
@@ -53,8 +52,6 @@ void textRefresh() {
   textInfo.buffer[1] = a[1];
   textInfo.buffer[3] = a[2];
   textInfo.buffer[4] = a[3];
-  textInfo.buffer[6] = a[4];
-  textInfo.buffer[7] = a[5];
 }
 
 uint8_t textDrawChar(char code, uint8_t pos) {

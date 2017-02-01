@@ -1,15 +1,16 @@
 
 uint32_t timeCurrent;
 uint32_t timeLastTick;
-
+uint16_t timeTreshold;
 
 void timeSetup() {
+  timeTreshold = 1000;
   timeSet(0);
 }
 
 void timeLoop() {
   uint32_t now = millis();
-  if (now - timeLastTick >= 1000) {
+  if (now - timeLastTick >= timeTreshold) {
     timeCurrent++;
     if (timeCurrent >= 86400l) {
       timeCurrent = 0;
