@@ -25,6 +25,7 @@ public class ImageEditorPanel extends JPanel {
     private ChangeListener changeListener;
 
     public ImageEditorPanel() {
+        showIgnored = true;
     }
 
     @Override
