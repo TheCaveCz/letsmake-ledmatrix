@@ -8,17 +8,17 @@
 //  Licensed under MIT License (see LICENSE file for details)
 //
 
-$innerX = 45;
-$innerY = 35;
+$innerX = 43.5;
+$innerY = 33;
 $outerZ = 15;
 $wall = 1.6;
 $outerDia = 5;
 $dentZ = 2.5;
 
-$usbWidth = 8.4;
+$usbWidth = 9;
 $usbHeight = 4.2;
 $usbY = 4;
-$usbX = 6;
+$usbX = 5.5;
 $arduinoWidth = 19;
 $buttonDia = 8;
 

@@ -8,10 +8,10 @@
 //  Licensed under MIT License (see LICENSE file for details)
 //
 
-$innerX = 45;
-$innerY = 35;
+$innerX = 43.5;
+$innerY = 33;
 $outerZ = 13;
-$disp = 33.5;
+$disp = 32.1;
 $dispZ = 7.7;
 $wall = 1.6;
 $outerDia = 5;
