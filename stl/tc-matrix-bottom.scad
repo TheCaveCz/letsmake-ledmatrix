@@ -9,18 +9,18 @@
 //
 
 $innerX = 43.5;
-$innerY = 33;
+$innerY = 33.8;
 $outerZ = 15;
 $wall = 1.6;
 $outerDia = 5;
 $dentZ = 2.5;
 
-$usbWidth = 9;
-$usbHeight = 4.2;
-$usbY = 4;
-$usbX = 5.5;
+$usbWidth = 8;
+$usbHeight = 4;
 $arduinoWidth = 19;
-$buttonDia = 8;
+$buttonDia = 7.2;
+$usbY = 3.7;
+$usbX = ($arduinoWidth-$usbWidth)/2;
 
 
 difference() {

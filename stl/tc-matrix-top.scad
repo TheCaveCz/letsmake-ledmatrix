@@ -9,9 +9,9 @@
 //
 
 $innerX = 43.5;
-$innerY = 33;
+$innerY = 33.8;
 $outerZ = 13;
-$disp = 32.1;
+$disp = 32.2;
 $dispZ = 7.7;
 $wall = 1.6;
 $outerDia = 5;
